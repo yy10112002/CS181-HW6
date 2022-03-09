@@ -47,9 +47,24 @@ class MyBoard < Board
     def next_piece
         if @cheat
             @current_block = MyPiece.cheat_piece(self)
+            @cheat = false
         else
             @current_block = MyPiece.next_piece(self)
         end
+        @current_pos = nil
+    end
+
+    def store_current
+        locations = @current_block.current_rotation
+        displacement = @current_block.position
+        (0..(locations.size-1)).each{
+            |index| 
+            current = locations[index];
+            @grid[current[1]+displacement[1]][current[0]+displacement[0]] = 
+            @current_pos[index]
+        }
+        remove_filled
+        @delay = [@delay - 2, 80].max
     end
 
 end
@@ -59,7 +74,8 @@ class MyTetris < Tetris
     def set_board
         @canvas = TetrisCanvas.new
         @board = MyBoard.new(self)
-        @canvas.place(@board.block_size * @board.num_rows + 3, @board.block_size * @board.num_columns + 6, 24, 80)
+        @canvas.place(@board.block_size * @board.num_rows + 3,
+            @board.block_size * @board.num_columns + 6, 24, 80)
         @board.draw
     end
 
