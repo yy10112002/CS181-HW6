@@ -67,14 +67,9 @@ end
 
 class MyTetris < Tetris
   # your enhancements here
-    def initialize
-        super
-        set_board
-    end
-
     def set_board
         @canvas = TetrisCanvas.new
-        @board = Myboard.new(self)
+        @board = MyBoard.new(self)
         @canvas.place(@board.block_size * @board.num_rows + 3, @board.block_size * @board.num_columns + 6, 24, 80)
         @board.draw
     end
