@@ -67,6 +67,10 @@ end
 
 class MyTetris < Tetris
   # your enhancements here
+    def initialize
+        set_board
+    end
+
     def set_board
         @canvas = TetrisCanvas.new
         @board = Myboard.new(self)
