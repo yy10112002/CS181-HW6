@@ -68,6 +68,7 @@ end
 class MyTetris < Tetris
   # your enhancements here
     def initialize
+        super
         set_board
     end
 
