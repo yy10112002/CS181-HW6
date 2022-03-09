@@ -52,17 +52,6 @@ class MyBoard < Board
         end
     end
 
-    def store_current
-        locations = @current_block.current_rotation
-        displacement = @current_block.position
-        (0..locations.size-1).each{|index| 
-          current = locations[index];
-          @grid[current[1]+displacement[1]][current[0]+displacement[0]] = 
-          @current_pos[index]
-        }
-        remove_filled
-        @delay = [@delay - 2, 80].max
-    end
 end
 
 class MyTetris < Tetris
